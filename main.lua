@@ -1,6 +1,8 @@
+—— FONCTION POUR IMPORTER LES FICHIERS ".lua" D’UN DOSSIER
 function RequireFolder(folder)
     if love.filesystem.getInfo(folder) then
         for _, v in pairs(love.filesystem.getDirectoryItems(folder)) do
+            if not string.find(v, ".lua") then return end
             local n = string.gsub(v, ".lua", "")
             require(n)
         end
