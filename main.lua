@@ -1,4 +1,4 @@
-—— FONCTION POUR IMPORTER LES FICHIERS ".lua" D’UN DOSSIER
+-- FONCTION POUR IMPORTER LES FICHIERS ".lua" D’UN DOSSIER
 function RequireFolder(folder)
     if love.filesystem.getInfo(folder) then
         for _, v in pairs(love.filesystem.getDirectoryItems(folder)) do
@@ -8,8 +8,6 @@ function RequireFolder(folder)
         end
     end
 end
-
-—————————————————————
 
 function love.load()
     w, h = 1280, 720
@@ -27,6 +25,4 @@ end
 function love.draw()
 
 end
-
-————————————————————
 
