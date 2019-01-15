@@ -38,24 +38,26 @@ function Map:Load()
     }
 
     -- AUTO SMOOTHING
-    for y, yv in pairs(Map) do
-        if type(yv) == "table" then
-            for x, xv in pairs(yv) do
-                -- CLIFF SMOOTH
-                if xv == 1 then
-                    if Map[y][x+1] == 0 and Map[y+1][x+1] == 0 then
-                        Map[y][x] = 2
-                    elseif Map[y][x-1] == 0 and Map[y+1][x-1] == 0 then
-                        Map[y][x] = 3
-                    elseif Map[y][x+1] == 0 and Map[y+1][x+1] == 1 then
-                        Map[y][x+1] = 5
-                    elseif Map[y][x-1] == 0 and Map[y+1][x-1] == 1 then
-                        Map[y][x-1] = 4
-                    end
-                    --print(Map[y][x])
-                end
-            end
-        end
+    if mapSmooth then
+      for y, yv in pairs(Map) do
+          if type(yv) == "table" then
+              for x, xv in pairs(yv) do
+                  -- CLIFF SMOOTH
+                  if xv == 1 then
+                      if Map[y][x+1] == 0 and Map[y+1][x+1] == 0 then
+                          Map[y][x] = 2
+                      elseif Map[y][x-1] == 0 and Map[y+1][x-1] == 0 then
+                          Map[y][x] = 3
+                      elseif Map[y][x+1] == 0 and Map[y+1][x+1] == 1 then
+                          Map[y][x+1] = 5
+                      elseif Map[y][x-1] == 0 and Map[y+1][x-1] == 1 then
+                          Map[y][x-1] = 4
+                      end
+                      --print(Map[y][x])
+                  end
+              end
+          end
+      end
     end
 end
 
@@ -63,7 +65,7 @@ function Map:Draw()
     for y, yv in pairs(Map) do
         if type(yv) == "table" then
            for x, xv in pairs(yv) do
-                love.graphics.draw(MapImg[xv], (x-1)*16, (y-1)*16)
+                love.graphics.draw(MapImg[xv], (x-1)*32, (y-1)*32, 0, 2, 2)
             end
         end
     end

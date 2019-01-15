@@ -16,21 +16,24 @@ end
 function love.load()
     w, h = 1280, 720
     title = "MedievalGame"
+    mapSmooth = true
 
     love.window.setMode(w, h)
     love.window.setTitle(title)
     love.graphics.setDefaultFilter("nearest")
-    
+
     RequireFolder("lua")
     
     Image:Load()
     Map:Load()
     Player:Load()
+    Cursor:Load()
 end
 
 function love.update(dt)
     Timer:Update(dt)
     Player:Update(dt)
+    Cursor:Update()
 end
 
 function love.keypressed(k)
@@ -38,9 +41,8 @@ function love.keypressed(k)
 end
 
 function love.draw()
-    love.graphics.scale(2, 2)
-
     Map:Draw()
     Player:Draw()
+    Cursor:Draw()
 end
 

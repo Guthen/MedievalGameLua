@@ -34,5 +34,5 @@ function Player:Update(dt)
 end
 
 function Player:Draw()
-    love.graphics.draw(self.img, self.x*16, self.y*16)
+    love.graphics.draw(self.img, self.x*32, self.y*32, 0, 2, 2)
 end
