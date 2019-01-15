@@ -18,6 +18,7 @@ function love.load()
     RequireFolder("lua")
     
     Image:Load()
+    Map:Load()
     Player:Load()
 end
 
@@ -30,6 +31,7 @@ function love.keypressed(k)
 end
 
 function love.draw()
+    Map:Draw()
     Player:Draw()
 end
 
