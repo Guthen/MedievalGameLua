@@ -24,10 +24,20 @@ Map =
  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
 }
 
+function Map:Load()
+    MapImg = 
+    {
+      [0] = Image["terrain_grass"],
+      [1] = Image["terrain_cliff"],
+    }
+end
+
 function Map:Draw()
-    for k, v in pairs(Map) do
+    for y, yv in pairs(Map) do
         if type(v) == "table" then
- 
+           for x, xv in pairs(yv) do
+                love.graphics.draw(MapImg[xv], x*16, y*16)
+            end
         end
     end
 end
