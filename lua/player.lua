@@ -3,7 +3,7 @@ Player = {}
 function Player:Load()
     self.x = 0
     self.y = 0
-    self.img = love.graphics.newImage("")
+    self.img = Image["player"]
 end
 
 function Player:Key(k)
@@ -23,5 +23,5 @@ function Player:Update(dt)
 end
 
 function Player:Draw()
-    love.graphics.draw(self.img, self.x, self.y)
+    love.graphics.draw(self.img, self.x*16, self.y*16)
 end
