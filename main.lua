@@ -25,6 +25,10 @@ function love.update(dt)
     Player:Update(dt)
 end
 
+function love.keypressed(k)
+    Player:Key(k)
+end
+
 function love.draw()
     Player:Draw()
 end
