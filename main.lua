@@ -16,13 +16,16 @@ function love.load()
     love.window.setMode(w, h)
     love.window.setTitle(title)
     RequireFolder("lua")
+    
+    Image:Load()
+    Player:Load()
 end
 
 function love.update(dt)
-
+    Player:Update(dt)
 end
 
 function love.draw()
-
+    Player:Draw()
 end
 
