@@ -36,7 +36,7 @@ function Map:Draw()
     for y, yv in pairs(Map) do
         if type(v) == "table" then
            for x, xv in pairs(yv) do
-                love.graphics.draw(MapImg[xv], x*16, y*16)
+                love.graphics.draw(MapImg[xv], (x-1)*16, (y-1)*16)
             end
         end
     end
