@@ -7,13 +7,13 @@ function Player:Load()
 end
 
 function Player:Key(k)
-    if k == "z" then
+    if k == "z" and Map[self.y+1-1] and Map[self.y+1-1][self.x+1] == 0 then
         self.y = self.y - 1
-    elseif k == "s" then
+    elseif k == "s" and Map[self.y+1+1] and Map[self.y+1+1][self.x+1] == 0 then
         self.y = self.y + 1
-    elseif k == "q" then
+    elseif k == "q" and Map[self.y+1] and Map[self.y+1][self.x+1-1] == 0 then
         self.x = self.x - 1
-    elseif k == "d" then
+    elseif k == "d" and Map[self.y+1] and Map[self.y+1][self.x+1+1] == 0 then
         self.x = self.x + 1
     end
 end
