@@ -23,6 +23,7 @@ function love.load()
 end
 
 function love.update(dt)
+    Timer:Update(dt)
     Player:Update(dt)
 end
 
