@@ -24,4 +24,11 @@ Map =
  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
 }
 
+function Map:Draw()
+    for k, v in pairs(Map) do
+        if type(v) == "table" then
+ 
+        end
+    end
+end
 
