@@ -6,9 +6,12 @@ function Town:Add(img, x, y, name)
 end
 
 function Town:Update(dt)
-
+    if #self.towns == 0 then return end
 end
 
 function Town:Draw()
-    if self.towns <= 0 then return end
+    if #self.towns == 0 then return end
+    for _, v in pairs(self.towns) do 
+        love.graphics.draw(v.img, v.x, v.y)
+    end
 end
