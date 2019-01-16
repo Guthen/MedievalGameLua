@@ -11,6 +11,12 @@ function Cursor:Update()
 	self.y = math.floor(love.mouse.getY()/tilesetSize)*tilesetSize
 end
 
+function Cursor:LeftClick()
+    if Map.MapEdit then
+        Map[self.x+1][self.y+1] = Map.MapEditImg
+    end
+end
+
 function Cursor:Draw()
 	love.graphics.draw(self.img, self.x, self.y, 0, tilesetSize/self.img:getWidth(), tilesetSize/self.img:getHeight())
 end
