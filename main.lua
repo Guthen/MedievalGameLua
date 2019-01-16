@@ -34,6 +34,7 @@ function love.update(dt)
     Timer:Update(dt)
     Player:Update(dt)
     Cursor:Update()
+    Town:Update()
 end
 
 function love.keypressed(k)
@@ -42,6 +43,7 @@ end
 
 function love.draw()
     Map:Draw()
+    Town:Draw()
     Player:Draw()
     Cursor:Draw()
 end
