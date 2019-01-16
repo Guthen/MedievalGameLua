@@ -25,21 +25,8 @@ Map =
  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
 }
 
-function Map:Load()
-    MapImg = 
-    {
-      [0] = Image["terrain_grass"],
-      [1] = Image["terrain_cliff"],
-      [2] = Image["terrain_cliff_right_end"],
-      [3] = Image["terrain_cliff_left_end"],
-      [4] = Image["terrain_cliff_right"],
-      [5] = Image["terrain_cliff_left"],
-      [6] = Image["terrain_water"],
-    }
-
-    -- AUTO SMOOTHING
-    if mapSmooth then
-      for y, yv in pairs(Map) do
+function Map:MapSmooth() 
+for y, yv in pairs(Map) do
           if type(yv) == "table" then
               for x, xv in pairs(yv) do
                   -- CLIFF SMOOTH
@@ -58,6 +45,23 @@ function Map:Load()
               end
           end
       end
+end
+
+function Map:Load()
+    MapImg = 
+    {
+      [0] = Image["terrain_grass"],
+      [1] = Image["terrain_cliff"],
+      [2] = Image["terrain_cliff_right_end"],
+      [3] = Image["terrain_cliff_left_end"],
+      [4] = Image["terrain_cliff_right"],
+      [5] = Image["terrain_cliff_left"],
+      [6] = Image["terrain_water"],
+    }
+
+    -- AUTO SMOOTHING
+    if mapSmooth then
+        self:MapSmooth()
     end
 end
 
