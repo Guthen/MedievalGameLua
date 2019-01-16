@@ -20,5 +20,5 @@ end
 
 -- TOWNS CONSTRUCTIONS
 function Town:Load()
-	Town:Add(Image["slime_red"], 5, 5, "Janvier")
+	Town:Add(Image["town_castle"], 5, 5, "Cujult Castle")
 end
