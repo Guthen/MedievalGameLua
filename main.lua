@@ -17,6 +17,7 @@ function love.load()
     w, h = 1280, 720
     title = "MedievalGame"
     mapSmooth = true
+    tilesetSize = 32
 
     love.window.setMode(w, h)
     love.window.setTitle(title)
