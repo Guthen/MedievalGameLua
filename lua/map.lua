@@ -58,10 +58,26 @@ function Map:Load()
       [5] = Image["terrain_cliff_left"],
       [6] = Image["terrain_water"],
     }
+    self.MapEditImg = 1
 
     -- AUTO SMOOTHING
     if mapSmooth then
         self:MapSmooth()
+    end
+end
+
+function Map:Key(k)
+    if k == "m" then
+        Toggle(self.mapEdit)
+    end
+    if self.mapEdit then
+        if k == "right" then
+            self.MapEditImg = self.MapEditImg + 1
+            if self.MapEditImg > #MapImg then self.MapEditImg = 1 end
+        elseif k == "left" then
+            self.MapEditImg = self.MapEditImg - 1
+            if self.MapEditImg < 1 then self.MapEditImg = #MapImg end
+        end
     end
 end
 
