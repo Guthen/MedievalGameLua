@@ -9,10 +9,11 @@ end
 
 function Timer:Update(dt)
     if not dt then return error(2, "Timer:Update() : #1 argument needed, use deltaTime !") end
-    if #Timer.timers == 0 then return end
-    for k, v in pairs(Timer.timers) do
+    if #self.timers == 0 then return end
+    for k, v in pairs(self.timers) do
         if v.s > 0 then s = s - dt else
             v.func()
+            table.remove(self.timers, k)
         end
     end
 end
