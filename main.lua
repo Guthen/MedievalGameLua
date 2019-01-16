@@ -40,8 +40,15 @@ function love.update(dt)
     Town:Update()
 end
 
+function love.mousepressed(x, y, but)
+    if but == "1" then
+        Cursor:LeftClick()
+    end
+end
+
 function love.keypressed(k)
     Player:Key(k)
+    Map:Key(k)
 end
 
 function love.draw()
