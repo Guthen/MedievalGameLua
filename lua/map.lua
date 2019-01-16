@@ -59,6 +59,7 @@ function Map:Load()
       [6] = Image["terrain_water"],
     }
     self.MapEditImg = 1
+    self.MapEdit = false
 
     -- AUTO SMOOTHING
     if mapSmooth then
@@ -68,9 +69,9 @@ end
 
 function Map:Key(k)
     if k == "m" then
-        Toggle(self.mapEdit)
+        Toggle(self.MapEdit)
     end
-    if self.mapEdit then
+    if self.MapEdit then
         if k == "right" then
             self.MapEditImg = self.MapEditImg + 1
             if self.MapEditImg > #MapImg then self.MapEditImg = 1 end
@@ -88,6 +89,11 @@ function Map:Draw()
                 love.graphics.draw(MapImg[xv], (x-1)*tilesetSize, (y-1)*tilesetSize, 0, tilesetSize/MapImg[xv]:getWidth(), tilesetSize/MapImg[xv]:getHeight())
             end
         end
+    end
+    if self.MapEdit then
+        love.graphics.print("[M] Map Editor : ", 0, 0)
+        love.graphics.print("Right Arrow : +1 | Left Arrow : -1", 0, 30)
+        love.graphics.print("Current ID : "..Map.MapEditImg, 0, 60)
     end
 end
 
