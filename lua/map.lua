@@ -13,7 +13,7 @@ Map =
  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
  {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
- {0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+ {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
@@ -26,25 +26,25 @@ Map =
 }
 
 function Map:MapSmooth() 
-for y, yv in pairs(Map) do
-          if type(yv) == "table" then
-              for x, xv in pairs(yv) do
-                  -- CLIFF SMOOTH
-                  if xv == 1 then
-                      if Map[y][x+1] == 0 and Map[y+1][x+1] == 0 then
-                          Map[y][x] = 2
-                      elseif Map[y][x-1] == 0 and Map[y+1][x-1] == 0 then
-                          Map[y][x] = 3
-                      elseif Map[y][x+1] == 0 and Map[y+1][x+1] == 1 then
-                          Map[y][x+1] = 5
-                      elseif Map[y][x-1] == 0 and Map[y+1][x-1] == 1 then
-                          Map[y][x-1] = 4
-                      end
-                      --print(Map[y][x])
-                  end
-              end
-          end
-      end
+    for y, yv in pairs(Map) do
+        if type(yv) == "table" then
+            for x, xv in pairs(yv) do
+                -- CLIFF SMOOTH
+                if xv == 1 then
+                    if Map[y][x+1] == 0 and Map[y+1][x+1] == 0 then
+                        Map[y][x] = 2
+                    elseif Map[y][x-1] == 0 and Map[y+1][x-1] == 0 then
+                        Map[y][x] = 3
+                    elseif Map[y][x+1] == 0 and Map[y+1][x+1] == 1 then
+                        Map[y][x+1] = 5
+                    elseif Map[y][x-1] == 0 and Map[y+1][x-1] == 1 then
+                        Map[y][x-1] = 4
+                    end
+                    --print(Map[y][x])
+                end
+            end
+        end
+    end
 end
 
 function Map:Load()
@@ -69,7 +69,7 @@ function Map:Draw()
     for y, yv in pairs(Map) do
         if type(yv) == "table" then
            for x, xv in pairs(yv) do
-                love.graphics.draw(MapImg[xv], (x-1)*tilesetSize, (y-1)*tilesetSize, 0, tilesetSize/MapImg[xv]:getWidth(), tilesetSize/Map[xv]:getHeight())
+                love.graphics.draw(MapImg[xv], (x-1)*tilesetSize, (y-1)*tilesetSize, 0, tilesetSize/MapImg[xv]:getWidth(), tilesetSize/MapImg[xv]:getHeight())
             end
         end
     end

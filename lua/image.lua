@@ -8,3 +8,7 @@ function Image:Load()
         end
     end
 end
+
+function Image:DrawOverheadText(text, x, y)
+    love.graphics.printf(text, x*tilesetSize-tilesetSize, y*tilesetSize-tilesetSize/2, 100, "center")
+end

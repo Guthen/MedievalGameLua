@@ -27,6 +27,8 @@ function love.load()
     
     Image:Load()
     Map:Load()
+    Town:Load()
+    
     Player:Load()
     Cursor:Load()
 end
