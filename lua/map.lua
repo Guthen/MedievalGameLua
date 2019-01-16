@@ -69,7 +69,7 @@ function Map:Draw()
     for y, yv in pairs(Map) do
         if type(yv) == "table" then
            for x, xv in pairs(yv) do
-                love.graphics.draw(MapImg[xv], (x-1)*32, (y-1)*32, 0, 2, 2)
+                love.graphics.draw(MapImg[xv], (x-1)*tilesetSize, (y-1)*tilesetSize, 0, tilesetSize/MapImg[xv]:getWidth(), tilesetSize/Map[xv]:getHeight())
             end
         end
     end
