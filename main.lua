@@ -28,6 +28,7 @@ function love.load()
     Image:Load()
     Map:Load()
     Town:Load()
+    Faction:Load()
     
     Player:Load()
     Cursor:Load()
@@ -39,7 +40,6 @@ function love.update(dt)
     Player:Update(dt)
     Cursor:Update()
     Town:Update()
-    Bot:Update(dt)
 end
 
 function love.mousepressed(x, y, but)

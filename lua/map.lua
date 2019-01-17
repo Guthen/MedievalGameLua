@@ -70,6 +70,17 @@ function Map:Load()
       [6] = Image["terrain_water"],
       [7] = Image["terrain_water_bridge"],
     }
+    BlockMapID = 
+    {
+        [0] = false,
+        [1] = true,
+        [2] = true,
+        [3] = true,
+        [4] = false,
+        [5] = false,
+        [6] = true,
+        [7] = false,
+    }
     self.MapEditImg = 1
     self.MapEdit = false
 
@@ -94,7 +105,7 @@ function Map:Key(k)
 end
 
 function Map:Draw()
-    for y, yv in pairs(Map) do
+    for y, yv in pairs(self) do
         if type(yv) == "table" then
            for x, xv in pairs(yv) do
                 love.graphics.draw(MapImg[xv], (x-1)*tilesetSize, (y-1)*tilesetSize, 0, tilesetSize/MapImg[xv]:getWidth(), tilesetSize/MapImg[xv]:getHeight())
