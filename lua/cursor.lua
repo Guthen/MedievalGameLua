@@ -13,8 +13,14 @@ end
 
 function Cursor:LeftClick()
     if Map.MapEdit then
-        Map[self.x+1][self.y+1] = Map.MapEditImg
+        Map[self.y/tilesetSize+1][self.x/tilesetSize+1] = Map.MapEditImg
     end
+end
+
+function Cursor:RightClick()
+	if Map.MapEdit then
+        Map[self.y/tilesetSize+1][self.x/tilesetSize+1] = 0
+	end
 end
 
 function Cursor:Draw()

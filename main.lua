@@ -41,8 +41,10 @@ function love.update(dt)
 end
 
 function love.mousepressed(x, y, but)
-    if but == "1" then
+    if but == 1 then
         Cursor:LeftClick()
+    elseif but == 2 then
+        Cursor:RightClick()
     end
 end
 
