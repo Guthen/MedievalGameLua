@@ -31,6 +31,7 @@ function love.load()
     
     Player:Load()
     Cursor:Load()
+    Bot:Load()
 end
 
 function love.update(dt)
@@ -38,6 +39,7 @@ function love.update(dt)
     Player:Update(dt)
     Cursor:Update()
     Town:Update()
+    Bot:Update(dt)
 end
 
 function love.mousepressed(x, y, but)
@@ -57,6 +59,7 @@ function love.draw()
     Map:Draw()
     Town:Draw()
     Player:Draw()
+    Bot:Draw()
     Cursor:Draw()
 end
 
