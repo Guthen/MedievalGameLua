@@ -13,13 +13,13 @@ end
 
 function Cursor:LeftClick()
     if Map.MapEdit then
-        Map[self.y/tilesetSize+1][self.x/tilesetSize+1] = Map.MapEditImg
+        Map.levels[Map.curMap][self.y/tilesetSize+1][self.x/tilesetSize+1] = Map.MapEditImg
     end
 end
 
 function Cursor:RightClick()
 	if Map.MapEdit then
-        Map[self.y/tilesetSize+1][self.x/tilesetSize+1] = 0
+        Map.levels[Map.curMap][self.y/tilesetSize+1][self.x/tilesetSize+1] = 0
 	end
 end
 

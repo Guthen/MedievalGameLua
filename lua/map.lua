@@ -106,6 +106,13 @@ function Map:Key(k)
         if self.MapEdit == false then Map:MapSmooth() PrintTable(self.levels[self.curMap]) end
     end
     if self.MapEdit then
+        if k == "r" then
+            for y,yv in pairs(self.levels[self.curMap]) do
+                for x,xv in pairs(yv) do
+                    if xv ~= 0 then self.levels[self.curMap][y][x] = 0 end
+                end
+            end
+        end
         if k == "right" then
             self.MapEditImg = self.MapEditImg + 1
             if self.MapEditImg > #MapImg then self.MapEditImg = 1 end
@@ -126,8 +133,9 @@ function Map:Draw()
     end
     if self.MapEdit then
         love.graphics.print("[M] Map Editor : ", 0, 0)
-        love.graphics.print("Left Arrow : -1 | Right Arrow : +1", 0, 15)
-        love.graphics.print("Current ID : "..Map.MapEditImg, 0, 30)
+        love.graphics.print("[R] Reset Map : ", 0, 15)
+        love.graphics.print("Left Arrow : -1 | Right Arrow : +1", 0, 30)
+        love.graphics.print("Current ID : "..self.MapEditImg, 0, 45)
     end
 end
 

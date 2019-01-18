@@ -8,11 +8,11 @@ end
 function Bot:UpdateMove()
 	if #self.bots == 0 then return end
 	for k,v in pairs(self.bots) do
-		if not v.dest then self:SetDestination(k, love.math.random(-3, 3), love.math.random(-3, 3)) else
-			if v.x < v.dest.x then v.x = v.x + 1 
-			elseif v.x > v.dest.x then v.x = v.x - 1
-			elseif v.y < v.dest.y then v.y = v.y + 1
-			elseif v.y > v.dest.y then v.y = v.y - 1
+		if not v.dest then self:SetDestination(k, 0, 0) else
+			if v.x < v.dest.x and Map.levels[Map.curMap][v.y+1+1] then v.x = v.x + 1 
+			elseif v.x > v.dest.x and Map.levels[Map.curMap][v.y+1-1] then v.x = v.x - 1
+			elseif v.y < v.dest.y and Map.levels[Map.curMap][v.y+1-1] then v.y = v.y - 1
+			elseif v.y > v.dest.y and Map.levels[Map.curMap][v.y+1+1] then v.y = v.y + 1
 			else v.dest = nil end
 		end
 	end
@@ -21,7 +21,20 @@ end
 function Bot:SetDestination(botId, x, y)
 	if not botId then return error(2, "Bot:SetDestination() : #1 argument must be number !") end
 	if not x or not y then return error(2, "Bot:SetDestination() : #2 or #3 argument must be number !") end
-	self.bots[botId].dest = {x = self.bots[botId].x+x, y = self.bots[botId].y+y}
+	local bot = self.bots[botId]
+	if x == 0 or y == 0 then
+		for _,v in pairs(Town.towns) do
+			for ke, _ in pairs(Faction:Get(bot.param.faction).enemy) do
+				if ke == v.param.faction then
+					x = v.x
+					y = v.y
+					print("Hey, "..x, y)
+				end
+			end
+		end
+	end
+	if x == 0 and y == 0 then x = love.math.random(-3, 3) y = love.math.random(-3, 3) end
+	bot.dest = {x = self.bots[botId].x+x, y = self.bots[botId].y+y}
 end
 
 function Bot:Draw()
