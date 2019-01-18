@@ -1,4 +1,7 @@
-Map = 
+Map = {}
+Map.levels = {}
+
+Map.levels[0] = 
 {
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 0, 0, 0},
@@ -24,32 +27,40 @@ Map =
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 }
+Map.levels[1] = 
+{
+
+}
+Map.levels[2] =
+{
+
+}
 
 function Map:MapSmooth() 
     if not mapSmooth then return end
-    for y, yv in pairs(Map) do
+    for y, yv in pairs(self.levels[self.curMap]) do
         if type(yv) == "table" then
             for x, xv in pairs(yv) do
 
                 -- CLIFF SMOOTH
                 if xv == 1 then
-                    if Map[y][x+1] == 0 and Map[y+1][x+1] == 0 then -- si à droite == 0 et en bas à droite == 0
-                        Map[y][x] = 2 -- mettre coin droit
+                    if self.levels[self.curMap][y][x+1] == 0 and self.levels[self.curMap][y+1][x+1] == 0 then -- si à droite == 0 et en bas à droite == 0
+                        self.levels[self.curMap][y][x] = 2 -- mettre coin droit
                     end
-                    if Map[y][x-1] == 0 and Map[y+1][x-1] == 0 then -- si à gauche == 0 et en bas à gauche == 0
-                        Map[y][x] = 3 -- mettre coin gauche
+                    if self.levels[self.curMap][y][x-1] == 0 and self.levels[self.curMap][y+1][x-1] == 0 then -- si à gauche == 0 et en bas à gauche == 0
+                        self.levels[self.curMap][y][x] = 3 -- mettre coin gauche
                     end
-                    if Map[y][x+1] == 0 and Map[y+1][x+1] == 1 then 
-                        Map[y][x+1] = 5
+                    if self.levels[self.curMap][y][x+1] == 0 and self.levels[self.curMap][y+1][x+1] == 1 then 
+                        self.levels[self.curMap][y][x+1] = 5
                     end
-                    if Map[y][x-1] == 0 and Map[y+1][x-1] == 1 then
-                        Map[y][x-1] = 4
+                    if self.levels[self.curMap][y][x-1] == 0 and self.levels[self.curMap][y+1][x-1] == 1 then
+                        self.levels[self.curMap][y][x-1] = 4
                     end
 
-                    if Map[y][x+1] == 2 or Map[y][x+1] == 3 and Map[y][x+2] == 1 then
-                        Map[y][x+1] = 1
-                    elseif Map[y][x-1] == 2 or Map[y][x-1] == 3 and Map[y][x-2] == 1 then
-                        Map[y][x-1] = 1
+                    if self.levels[self.curMap][y][x+1] == 2 or self.levels[self.curMap][y][x+1] == 3 and self.levels[self.curMap][y][x+2] == 1 then
+                        self.levels[self.curMap][y][x+1] = 1
+                    elseif self.levels[self.curMap][y][x-1] == 2 or self.levels[self.curMap][y][x-1] == 3 and self.levels[self.curMap][y][x-2] == 1 then
+                        self.levels[self.curMap][y][x-1] = 1
                     end
                 end
 
@@ -83,6 +94,7 @@ function Map:Load()
     }
     self.MapEditImg = 1
     self.MapEdit = false
+    self.curMap = 0
 
     -- AUTO SMOOTHING
     self:MapSmooth()
@@ -91,7 +103,7 @@ end
 function Map:Key(k)
     if k == "m" then
         self.MapEdit = Toggle(self.MapEdit)
-        if self.MapEdit == false then Map:MapSmooth() PrintTable(Map) end
+        if self.MapEdit == false then Map:MapSmooth() PrintTable(self.levels[self.curMap]) end
     end
     if self.MapEdit then
         if k == "right" then
@@ -105,7 +117,7 @@ function Map:Key(k)
 end
 
 function Map:Draw()
-    for y, yv in pairs(self) do
+    for y, yv in pairs(self.levels[self.curMap]) do
         if type(yv) == "table" then
            for x, xv in pairs(yv) do
                 love.graphics.draw(MapImg[xv], (x-1)*tilesetSize, (y-1)*tilesetSize, 0, tilesetSize/MapImg[xv]:getWidth(), tilesetSize/MapImg[xv]:getHeight())
