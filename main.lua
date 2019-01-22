@@ -33,6 +33,8 @@ function love.load()
     Player:Load()
     Cursor:Load()
     Bot:Load()
+
+    print("GAME LOADED !")
 end
 
 function love.update(dt)
