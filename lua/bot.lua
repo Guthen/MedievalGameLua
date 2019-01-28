@@ -9,8 +9,8 @@ function Bot:UpdateMove()
 	if #self.bots == 0 then return end
 	for k,v in pairs(self.bots) do
 		if not v.dest then self:SetDestination(k, 0, 0) else
-			if v.x < v.dest.x and Map.levels[Map.curMap][v.y+1+1] then v.x = v.x + 1 
-			elseif v.x > v.dest.x and Map.levels[Map.curMap][v.y+1-1] then v.x = v.x - 1
+			if v.x < v.dest.x and Map.levels[Map.curMap][v.y+1+1] and Map.levels[Map.curMap][v.y+1+1][v.x+1+1] then v.x = v.x + 1 
+			elseif v.x > v.dest.x and Map.levels[Map.curMap][v.y+1-1] and Map.levels[Map.curMap][v.y+1-1][v.x+1-1] then v.x = v.x - 1
 			elseif v.y < v.dest.y and Map.levels[Map.curMap][v.y+1-1] then v.y = v.y - 1
 			elseif v.y > v.dest.y and Map.levels[Map.curMap][v.y+1+1] then v.y = v.y + 1
 			else v.dest = nil end
@@ -54,6 +54,6 @@ function Bot:Draw()
 end
 
 function Bot:Load()
-	Bot:Add(Image["mage_obscur"], 9, 5, {name = "Hujalt", men = 20, faction = 1})
-	Bot:Add(Image["mage_blanc"], 15, 19, {name = "Kaft", men = 45, faction = 2})
+	Bot:Add(Image["Mage_obscur"], 9, 5, {name = "Hujalt", men = 20, faction = 1})
+	Bot:Add(Image["Mage_blanc"], 15, 19, {name = "Kaft", men = 45, faction = 2})
 end

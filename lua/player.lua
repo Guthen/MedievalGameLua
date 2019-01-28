@@ -21,12 +21,12 @@ function Player:Key(k)
         self.canMove = false
         Timer:Add(self.delayMove, function() self.canMove = true end)
         Bot:UpdateMove()
-    elseif k == "q" and Map.levels[Map.curMap][self.y+1] and not BlockMapID[Map.levels[Map.curMap][self.y+1][self.x+1-1]] then
+    elseif k == "q" and Map.levels[Map.curMap][self.y+1] and Map.levels[Map.curMap][self.y+1][self.x+1-1] and not BlockMapID[Map.levels[Map.curMap][self.y+1][self.x+1-1]] then
         self.x = self.x - 1
         self.canMove = false
         Timer:Add(self.delayMove, function() self.canMove = true end)
         Bot:UpdateMove()
-    elseif k == "d" and Map.levels[Map.curMap][self.y+1] and not BlockMapID[Map.levels[Map.curMap][self.y+1][self.x+1+1]] then
+    elseif k == "d" and Map.levels[Map.curMap][self.y+1] and Map.levels[Map.curMap][self.y+1][self.x+1+1] and not BlockMapID[Map.levels[Map.curMap][self.y+1][self.x+1+1]] then
         self.x = self.x + 1
         self.canMove = false
         Timer:Add(self.delayMove, function() self.canMove = true end)
