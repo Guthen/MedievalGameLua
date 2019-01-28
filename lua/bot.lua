@@ -54,6 +54,6 @@ function Bot:Draw()
 end
 
 function Bot:Load()
-	Bot:Add(Image["Mage_obscur"], 9, 5, {name = "Hujalt", men = 20, faction = 1})
-	Bot:Add(Image["Mage_blanc"], 15, 19, {name = "Kaft", men = 45, faction = 2})
+	Bot:Add(Image["mage_obscur"], 9, 5, {name = "Hujalt", men = 20, faction = 1})
+	Bot:Add(Image["mage_blanc"], 15, 19, {name = "Kaft", men = 45, faction = 2})
 end

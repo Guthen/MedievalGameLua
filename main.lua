@@ -14,7 +14,7 @@ end
 -- FONCTIONS PRINCIPALES LOVE
 
 function love.load()
-    w, h = 1280, 720
+    w, h = 1280, 736
     title = "MedievalGame"
     mapSmooth = true
     tilesetSize = 32
