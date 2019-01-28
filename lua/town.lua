@@ -13,6 +13,7 @@ end
 function Town:Draw()
     if #self.towns == 0 then return end
     for _, v in pairs(self.towns) do 
+        if v.param.map ~= Map.curMap then return end
 		if v.param.faction then
 			local clr = Faction:Get(v.param.faction).color
 			love.graphics.setColor(clr.r, clr.g, clr.b)
@@ -25,6 +26,6 @@ end
 
 -- TOWNS CONSTRUCTIONS
 function Town:Load()
-	Town:Add(Image["town_castle"], 5, 5, {name = "Cujult Castle", faction = 1})
-	Town:Add(Image["town_castle"], 18, 12, {name = "Kalt Castle", faction = 2})
+	Town:Add(Image["town_castle"], 5, 5, {name = "Cujult Castle", faction = 1, map = 0})
+	Town:Add(Image["town_castle"], 18, 12, {name = "Kalt Castle", faction = 2, map = 0})
 end

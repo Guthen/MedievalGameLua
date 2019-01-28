@@ -40,6 +40,7 @@ end
 function Bot:Draw()
 	if #self.bots == 0 then return end
 	for k,v in pairs(self.bots) do
+		if v.param.map ~= Map.curMap then return end
 		if v.param.faction then
 			local clr = Faction:Get(v.param.faction).color
 			love.graphics.setColor(clr.r, clr.g, clr.b)
@@ -54,6 +55,6 @@ function Bot:Draw()
 end
 
 function Bot:Load()
-	Bot:Add(Image["mage_obscur"], 9, 5, {name = "Hujalt", men = 20, faction = 1})
-	Bot:Add(Image["mage_blanc"], 15, 19, {name = "Kaft", men = 45, faction = 2})
+	Bot:Add(Image["mage_obscur"], 9, 5, {name = "Hujalt", men = 20, faction = 1, map = 0})
+	Bot:Add(Image["mage_blanc"], 15, 19, {name = "Kaft", men = 45, faction = 2, map = 0})
 end
