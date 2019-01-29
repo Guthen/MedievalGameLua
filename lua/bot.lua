@@ -8,22 +8,32 @@ end
 function Bot:UpdateMove()
 	if #self.bots == 0 then return end
 	for k,v in pairs(self.bots) do
-		if not v.dest then self:SetDestination(k, 0, 0) elseif v.canMove and v.dest then
+		if not v.dest then self:SetDestination(k, 13, 10) elseif v.canMove and v.dest then
 			if v.x < v.dest.x and Map.levels[Map.curMap][v.y+1+1] and Map.levels[Map.curMap][v.y+1+1][v.x+1+1] then v.x = v.x + 1 
 			elseif v.x > v.dest.x and Map.levels[Map.curMap][v.y+1-1] and Map.levels[Map.curMap][v.y+1-1][v.x+1-1] then v.x = v.x - 1
-			elseif v.y < v.dest.y and Map.levels[Map.curMap][v.y+1-1] then v.y = v.y - 1
-			elseif v.y > v.dest.y and Map.levels[Map.curMap][v.y+1+1] then v.y = v.y + 1
+			elseif v.y < v.dest.y and Map.levels[Map.curMap][v.y+1-1] then v.y = v.y + 1
+			elseif v.y > v.dest.y and Map.levels[Map.curMap][v.y+1+1] then v.y = v.y - 1
 			else v.dest = nil end
-        for bk, bv in pairs(self.bots) do
-            if bk == k then return end
-            if bv.x == v.x and bv.y == v.y then
-                if not Faction:Get(v.param.faction).enemy[bv.param.faction] then return end
-                v.canMove = false
-                bv.canMove = false
-                print(v.name .. " is attacking " .. bv.name)
-            end
-        end
-      end
+      	end
+	end
+end
+
+function Bot:UpdateBattle()
+	if #self.bots == 0 then return end
+	for k, v in pairs(self.bots) do
+	    for bk, bv in pairs(self.bots) do
+	    	print(k, bk)
+	        if not bk == k then
+	        	print(bv.x, bv.y, v.x, v.y)
+		    	if bv.x == v.x and bv.y == v.y then
+		    		print(v.param.faction .. " vs. " .. bv.param.faction)
+		        	if not Faction:Get(v.param.faction).enemy[bv.param.faction] then return print("Are enemy : ", Faction:Get(v.param.faction).enemy[bv.param.faction]) end
+		        	v.canMove = false
+		            bv.canMove = false
+		            print(v.name .. " is attacking " .. bv.name)
+		        end
+		    end
+	    end
 	end
 end
 
@@ -43,27 +53,29 @@ function Bot:SetDestination(botId, x, y)
 		end
 	end
 	if x == 0 and y == 0 then x = love.math.random(-3, 3) y = love.math.random(-3, 3) end
-	bot.dest = {x = self.bots[botId].x+x, y = self.bots[botId].y+y}
+	bot.dest = {x = x, y = y}
 end
 
 function Bot:Draw()
 	if #self.bots == 0 then return end
 	for k,v in pairs(self.bots) do
-		if v.param.map ~= Map.curMap then return end
-		if v.param.faction then
-			local clr = Faction:Get(v.param.faction).color
-			love.graphics.setColor(clr.r, clr.g, clr.b)
+		if v.param.map == Map.curMap then
+			if v.param.faction then
+				local clr = Faction:Get(v.param.faction).color
+				love.graphics.setColor(clr.r, clr.g, clr.b)
+			end
+			if v.param.name then
+				if not v.param.men then Image:DrawOverheadText(v.param.name, v.x, v.y) end
+				Image:DrawOverheadText(v.param.name .. " + " .. v.param.men, v.x, v.y)
+			end
+			love.graphics.setColor(1, 1, 1)
+			love.graphics.draw(v.img, v.x*tilesetSize, v.y*tilesetSize, 0, tilesetSize/v.img:getWidth(), tilesetSize/v.img:getHeight())
 		end
-		if v.param.name then
-			if not v.param.men then Image:DrawOverheadText(v.param.name, v.x, v.y) end
-			Image:DrawOverheadText(v.param.name .. " + " .. v.param.men, v.x, v.y)
-		end
-		love.graphics.setColor(1, 1, 1)
-		love.graphics.draw(v.img, v.x*tilesetSize, v.y*tilesetSize, 0, tilesetSize/v.img:getWidth(), tilesetSize/v.img:getHeight())
 	end
 end
 
 function Bot:Load()
+	--Bot:Add(Image["Mage_obscur"], 20, 20, {name = "Kulfalt", men = 115, faction = 1, map = 1})
 	Bot:Add(Image["Mage_obscur"], 9, 5, {name = "Hujalt", men = 20, faction = 1, map = 0})
 	Bot:Add(Image["Mage_blanc"], 15, 19, {name = "Kaft", men = 45, faction = 2, map = 0})
 end
