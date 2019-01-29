@@ -2,19 +2,28 @@ Bot = {}
 Bot.bots = {}
 
 function Bot:Add(img, x, y, param)
-	table.insert(self.bots, {img = img, x = x, y = y, param = param})
+	table.insert(self.bots, {img = img, x = x, y = y, canMove = true, param = param})
 end
 
 function Bot:UpdateMove()
 	if #self.bots == 0 then return end
 	for k,v in pairs(self.bots) do
-		if not v.dest then self:SetDestination(k, 0, 0) else
+		if not v.dest then self:SetDestination(k, 0, 0) elseif v.canMove and v.dest then
 			if v.x < v.dest.x and Map.levels[Map.curMap][v.y+1+1] and Map.levels[Map.curMap][v.y+1+1][v.x+1+1] then v.x = v.x + 1 
 			elseif v.x > v.dest.x and Map.levels[Map.curMap][v.y+1-1] and Map.levels[Map.curMap][v.y+1-1][v.x+1-1] then v.x = v.x - 1
 			elseif v.y < v.dest.y and Map.levels[Map.curMap][v.y+1-1] then v.y = v.y - 1
 			elseif v.y > v.dest.y and Map.levels[Map.curMap][v.y+1+1] then v.y = v.y + 1
 			else v.dest = nil end
-		end
+        for bk, bv in pairs(self.bots) do
+            if bk == k then return end
+            if bv.x == v.x and bv.y == v.y then
+                if not Faction:Get(v.param.faction).enemy[bv.param.faction] then return end
+                v.canMove = false
+                bv.canMove = false
+                print(v.name .. " is attacking " .. bv.name)
+            end
+        end
+      end
 	end
 end
 
