@@ -42,5 +42,4 @@ function Faction:Load()
 	self:Add(0, {name = "Neutral", enemy = {}, ally = {}, color = {r = 1, g = 1, b = 1}})
 	self:Add(1, {name = "Ferult Empirult", enemy = {}, ally = {}, color = {r = 1, g = 0, b = 0}})
 	self:Add(2, {name = "Gafalt Empiralt", enemy = {}, ally = {}, color = {r = 0, g = 0.98, b = 0.95}})
-	self:Enemy(1, 2)
 end
