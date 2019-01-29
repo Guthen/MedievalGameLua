@@ -9,18 +9,22 @@ end
 function Cursor:Update()
 	self.x = math.floor(love.mouse.getX()/tilesetSize)*tilesetSize
 	self.y = math.floor(love.mouse.getY()/tilesetSize)*tilesetSize
+
+	if love.mouse.isDown(1) and Map.MapEdit then
+        Map:GetCurMap()[self.y/tilesetSize+1][self.x/tilesetSize+1] = Map.MapEditIndex[Map.MapEditImg]
+    elseif love.mouse.isDown(2) and Map.MapEdit then
+        Map:GetCurMap()[self.y/tilesetSize+1][self.x/tilesetSize+1] = 0
+    end
 end
 
 function Cursor:LeftClick()
-    if Map.MapEdit then
-        Map:GetCurMap()[self.y/tilesetSize+1][self.x/tilesetSize+1] = Map.MapEditImg
+    if not Map.MapEdit then
+    	print(self.x/tilesetSize, self.y/tilesetSize)
     end
 end
 
 function Cursor:RightClick()
-	if Map.MapEdit then
-        Map:GetCurMap()[self.y/tilesetSize+1][self.x/tilesetSize+1] = 0
-	end
+
 end
 
 function Cursor:Draw()

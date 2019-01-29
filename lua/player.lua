@@ -5,6 +5,9 @@ function Player:Load()
     self.y = 0
     self.img = Image["player"]
 
+    self.name = "Kylus"
+    self.faction = 0
+
     self.canMove = true
     self.delayMove = .1
 end
@@ -64,4 +67,9 @@ end
 
 function Player:Draw()
     love.graphics.draw(self.img, self.x*32, self.y*32, 0, 2, 2)
+
+    local clr = Faction:Get(self.faction).color
+    love.graphics.setColor(clr.r, clr.g, clr.b)
+        Image:DrawOverheadText(self.name, self.x, self.y)
+    love.graphics.setColor(1, 1, 1)
 end

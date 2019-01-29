@@ -21,7 +21,7 @@ Map.levels[0] =
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1, 2, 0, 0, 0, 0, 6, 0, 0, 0, 0},
   {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 5, 0, 0, 0, 0, 0, 4, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 6, 6},
-  {6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 0, 0},
+  {0, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 0, 0},
   {0, 0, 0, 0, 0, 0, 6, 6, 6, 7, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 7, 6, 6, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -189,6 +189,12 @@ function Map:Load()
     }
     self.MapEditImg = 1
     self.MapEdit = false
+    self.MapEditIndex = {}
+    for k = 1, 30 do
+        if MapImg[k] then
+          table.insert(self.MapEditIndex, k)
+        end
+    end
 
     self.curMapX = 4
     self.curMapY = 1
@@ -217,10 +223,10 @@ function Map:Key(k)
         end
         if k == "right" then
             self.MapEditImg = self.MapEditImg + 1
-            if self.MapEditImg > #MapImg then self.MapEditImg = 1 end
+            if self.MapEditImg > #self.MapEditIndex then self.MapEditImg = 1 end
         elseif k == "left" then
             self.MapEditImg = self.MapEditImg - 1
-            if self.MapEditImg < 1 then self.MapEditImg = #MapImg end
+            if self.MapEditImg < 1 then self.MapEditImg = #self.MapEditIndex end
         end
 	  end
 end
@@ -237,7 +243,7 @@ function Map:Draw()
         love.graphics.print("[M] Map Editor : ", 0, 0)
         love.graphics.print("[R] Reset Map : ", 0, 15)
         love.graphics.print("Left Arrow : -1 | Right Arrow : +1", 0, 30)
-        love.graphics.print("Current ID : "..self.MapEditImg, 0, 45)
+        love.graphics.print("Current ID : "..self.MapEditIndex[self.MapEditImg], 0, 45)
     end
 end
 
