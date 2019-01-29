@@ -130,7 +130,7 @@ function Bot:Draw()
 end
 
 function Bot:Load()
-	--Bot:Add(Image["Mage_obscur"], 20, 20, {name = "Kulfalt", men = 115, faction = 1, map = 1})
-	Bot:Add(Image["Mage_obscur"], 9, 5, {name = "Hujalt", men = 20, faction = 1, map = {x = 4, y = 1}})
-	Bot:Add(Image["Mage_blanc"], 15, 19, {name = "Kaft", men = 45, faction = 2, map = {x = 4, y = 1}})
+	Bot:Add(Image["wizard_black"], 11, 8, {name = "Kulfalt", men = 115, faction = 1, map = {x = 3, y = 1}})
+	Bot:Add(Image["wizard_black"], 9, 5, {name = "Hujalt", men = 20, faction = 1, map = {x = 4, y = 1}})
+	Bot:Add(Image["wizard_white"], 15, 19, {name = "Kaft", men = 45, faction = 2, map = {x = 4, y = 1}})
 end
