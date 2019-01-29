@@ -9,10 +9,10 @@ function Bot:UpdateMove()
 	if #self.bots == 0 then return end
 	for k,v in pairs(self.bots) do
 		if not v.dest then self:SetDestination(k, 13, 10) elseif v.canMove and v.dest then
-			if v.x < v.dest.x and Map.levels[Map.curMap][v.y+1+1] and Map.levels[Map.curMap][v.y+1+1][v.x+1+1] then v.x = v.x + 1 
-			elseif v.x > v.dest.x and Map.levels[Map.curMap][v.y+1-1] and Map.levels[Map.curMap][v.y+1-1][v.x+1-1] then v.x = v.x - 1
-			elseif v.y < v.dest.y and Map.levels[Map.curMap][v.y+1-1] then v.y = v.y + 1
-			elseif v.y > v.dest.y and Map.levels[Map.curMap][v.y+1+1] then v.y = v.y - 1
+			if v.x < v.dest.x and Map:GetCurMap()[v.y+1+1] and Map:GetCurMap()[v.y+1+1][v.x+1+1] then v.x = v.x + 1 
+			elseif v.x > v.dest.x and Map:GetCurMap()[v.y+1-1] and Map:GetCurMap()[v.y+1-1][v.x+1-1] then v.x = v.x - 1
+			elseif v.y < v.dest.y and Map:GetCurMap()[v.y+1-1] then v.y = v.y + 1
+			elseif v.y > v.dest.y and Map:GetCurMap()[v.y+1+1] then v.y = v.y - 1
 			else v.dest = nil end
       	end
 	end
@@ -59,7 +59,7 @@ end
 function Bot:Draw()
 	if #self.bots == 0 then return end
 	for k,v in pairs(self.bots) do
-		if v.param.map == Map.curMap then
+		if v.param.map.x == Map.curMapX and v.param.map.y == Map.curMapY then
 			if v.param.faction then
 				local clr = Faction:Get(v.param.faction).color
 				love.graphics.setColor(clr.r, clr.g, clr.b)
@@ -76,6 +76,6 @@ end
 
 function Bot:Load()
 	--Bot:Add(Image["Mage_obscur"], 20, 20, {name = "Kulfalt", men = 115, faction = 1, map = 1})
-	Bot:Add(Image["Mage_obscur"], 9, 5, {name = "Hujalt", men = 20, faction = 1, map = 0})
-	Bot:Add(Image["Mage_blanc"], 15, 19, {name = "Kaft", men = 45, faction = 2, map = 0})
+	Bot:Add(Image["Mage_obscur"], 9, 5, {name = "Hujalt", men = 20, faction = 1, map = {x = 4, y = 1}})
+	Bot:Add(Image["Mage_blanc"], 15, 19, {name = "Kaft", men = 45, faction = 2, map = {x = 4, y = 1}})
 end
