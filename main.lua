@@ -52,6 +52,10 @@ function love.mousepressed(x, y, but)
     end
 end
 
+function love.wheelmoved(x, y)
+	Cursor:WheelMoved()
+end
+
 function love.keypressed(k)
     Player:Key(k)
     Map:Key(k)

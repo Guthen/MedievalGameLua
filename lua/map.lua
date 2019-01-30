@@ -140,8 +140,21 @@ function Map:MapSmooth()
 				
 				-- LAVA SMOOTH
 				if xv == 23 then
-					if Map:GetCurMap()[y][x+1] == 20 and Map:GetCurMap()[y][x-1] == 20 and Map:GetCurMap()[y-1][x] == 20 and Map:GetCurMap()[y+1][x] == 20 then
+					if Map:GetCurMap()[y] and Map:GetCurMap()[y][x+1] == 20 and 
+					   Map:GetCurMap()[y][x-1] == 20 and 
+					   Map:GetCurMap()[y-1] and Map:GetCurMap()[y-1][x] == 20 and 
+					   Map:GetCurMap()[y+1][x] == 20 then
 						self.Map[self.curMapY][self.curMapX][y][x] = 32
+					elseif Map:GetCurMap()[y] and (Map:GetCurMap()[y][x+1] == 23 or Map:GetCurMap()[y][x-1] == 22) and
+					   (Map:GetCurMap()[y][x-1] == 23 or Map:GetCurMap()[y][x-1] == 22) and
+					   Map:GetCurMap()[y-1] and Map:GetCurMap()[y-1][x] == 20 and
+					   Map:GetCurMap()[y+1] and Map:GetCurMap()[y+1][x] == 20 then
+						self.Map[self.curMapY][self.curMapX][y][x] = 22
+					elseif Map:GetCurMap()[y-1] and (Map:GetCurMap()[y-1][x] == 23 or Map:GetCurMap()[y-1][x] == 21) and
+					   Map:GetCurMap()[y+1] and (Map:GetCurMap()[y-1][x] == 23 or Map:GetCurMap()[y-1][x] == 21) and
+					   Map:GetCurMap()[y][x] and Map:GetCurMap()[y][x-1] == 20 and
+					   Map:GetCurMap()[y][x] and Map:GetCurMap()[y][x+1] == 20 then
+						self.Map[self.curMapY][self.curMapX][y][x] = 21					
 					end
 				end
 
@@ -215,7 +228,7 @@ function Map:Load()
     self.MapEditImg = 1
     self.MapEdit = false
     self.MapEditIndex = {}
-    for k = 1, 30 do
+    for k = 1, 40 do
         if MapImg[k] then
           table.insert(self.MapEditIndex, k)
         end

@@ -23,6 +23,18 @@ function Cursor:LeftClick()
     end
 end
 
+function Cursor:WheelMoved(x, y)
+	if Map.MapEdit and x then
+		if x > 0 then
+			self.MapEditImg = self.MapEditImg + 1
+            if self.MapEditImg > #self.MapEditIndex then self.MapEditImg = 1 end
+		elseif x < 0 then
+            self.MapEditImg = self.MapEditImg - 1
+            if self.MapEditImg < 1 then self.MapEditImg = #self.MapEditIndex end		
+		end
+	end
+end
+
 function Cursor:RightClick()
 
 end
