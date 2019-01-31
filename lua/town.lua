@@ -27,6 +27,7 @@ end
 
 -- TOWNS CONSTRUCTIONS
 function Town:Load()
+	Town:Add(Image["town_cave"], 23, 17, {name = "Death Cave", faction = 0, map = {x = 3, y = 1}})
 	Town:Add(Image["town_castle"], 10, 7, {name = "Cujult Castle", faction = 1, map = {x = 3, y = 1}})
 	Town:Add(Image["town_castle"], 18, 12, {name = "Kalt Castle", faction = 2, map = {x = 4, y = 1}})
 end
