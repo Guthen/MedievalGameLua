@@ -39,7 +39,7 @@ function Map:MapSmooth()
 					   Map:GetCurMap()[y][x-1] == 20 and 
 					   Map:GetCurMap()[y-1] and Map:GetCurMap()[y-1][x] == 20 and 
 					   Map:GetCurMap()[y+1][x] == 20 then
-						self.Map[self.curMapY][self.curMapX][y][x] = 32
+						self.Map[self.curMapY][self.curMapX][y][x] = 34
 					elseif Map:GetCurMap()[y] and (Map:GetCurMap()[y][x+1] == 23 or Map:GetCurMap()[y][x-1] == 22) and
 					   (Map:GetCurMap()[y][x-1] == 23 or Map:GetCurMap()[y][x-1] == 22) and
 					   Map:GetCurMap()[y-1] and Map:GetCurMap()[y-1][x] == 20 and
@@ -95,15 +95,17 @@ function Map:Load()
       [21] = Image["terrain_demon_lava_vertical"],
       [22] = Image["terrain_demon_lava_horizontal"],
       [23] = Image["terrain_demon_lava"],
-	  [24] = Image["terrain_demon_lava_corner_upL"],
-	  [25] = Image["terrain_demon_lava_corner_upR"],
-	  [26] = Image["terrain_demon_lava_corner_downL"],
-	  [27] = Image["terrain_demon_lava_corner_downR"],
-	  [28] = Image["terrain_demon_lava_fill_up"],
-	  [29] = Image["terrain_demon_lava_fill_down"],
-	  [30] = Image["terrain_demon_lava_fill_right"],
-	  [31] = Image["terrain_demon_lava_fill_left"],
-	  [32] = Image["terrain_demon_lava_alone"],
+	  [24] = Image["terrain_demon_lava_vertical_bridge"],
+      [25] = Image["terrain_demon_lava_horizontal_bridge"],
+	  [26] = Image["terrain_demon_lava_corner_upL"],
+	  [27] = Image["terrain_demon_lava_corner_upR"],
+	  [28] = Image["terrain_demon_lava_corner_downL"],
+	  [29] = Image["terrain_demon_lava_corner_downR"],
+	  [30] = Image["terrain_demon_lava_fill_up"],
+	  [31] = Image["terrain_demon_lava_fill_down"],
+	  [32] = Image["terrain_demon_lava_fill_right"],
+	  [33] = Image["terrain_demon_lava_fill_left"],
+	  [34] = Image["terrain_demon_lava_alone"],
     }
     BlockMapID = 
     {
@@ -121,8 +123,8 @@ function Map:Load()
         [21] = true,
         [22] = true,
         [23] = true,
-		[24] = true,
-        [25] = true,
+		[24] = false,
+        [25] = false,
         [26] = true,
 		[27] = true,
         [28] = true,
@@ -130,6 +132,8 @@ function Map:Load()
 		[30] = true,
         [31] = true,
         [32] = true,
+		[33] = true,
+        [34] = true,
     }
     self.MapEditImg = 1
     self.MapEdit = false
@@ -179,8 +183,10 @@ function Map:Draw()
     for y, yv in pairs(Map:GetCurMap()) do
         if type(yv) == "table" then
            for x, xv in pairs(yv) do
-                love.graphics.draw(MapImg[xv], (x-1)*tilesetSize, (y-1)*tilesetSize, 0, tilesetSize/MapImg[xv]:getWidth(), tilesetSize/MapImg[xv]:getHeight())
-            end
+				if MapImg[xv] then
+					love.graphics.draw(MapImg[xv], (x-1)*tilesetSize, (y-1)*tilesetSize, 0, tilesetSize/MapImg[xv]:getWidth(), tilesetSize/MapImg[xv]:getHeight())
+				end
+			end
         end
     end
     if self.MapEdit then
